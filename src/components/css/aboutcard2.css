@@ -1,0 +1,71 @@
+.quotes-card {
+    position: relative;
+    width: 100%;
+    max-width: 900px;
+    padding: 28px;
+    border-radius: 12px;
+    background-color: #EFE9FF; /* Pastel Purple/Lavender */
+    color: #121212;
+    border: 3px solid var(--border-color);
+    box-shadow: 6px 6px 0px var(--shadow-color);
+    cursor: pointer;
+    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.3s;
+}
+
+.dark .quotes-card {
+    background-color: #1F1F23;
+    color: var(--text-color);
+}
+
+.quotes-card:hover {
+    transform: translate(-4px, -4px);
+    box-shadow: 10px 10px 0px var(--shadow-color);
+}
+
+.quotes-card:active {
+    transform: translate(2px, 2px);
+    box-shadow: 4px 4px 0px var(--shadow-color);
+}
+
+.quotes-text {
+    font-size: 1.25rem;
+    font-weight: 700;
+    line-height: 1.6;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    position: relative;
+}
+
+.quotes-text::before {
+    content: "“";
+    font-size: 3rem;
+    position: absolute;
+    top: -24px;
+    left: -14px;
+    opacity: 0.15;
+    font-family: serif;
+}
+
+.quotes-author {
+    display: block;
+    margin-top: 1.2rem;
+    font-family: 'Space Mono', monospace;
+    color: #121212;
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-align: right;
+    text-transform: uppercase;
+}
+
+.dark .quotes-author {
+    color: var(--text-color);
+    opacity: 0.85;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .quotes-card {
+        max-width: 100%;
+        padding: 20px;
+    }
+}

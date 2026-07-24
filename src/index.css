@@ -1,0 +1,131 @@
+@import "tailwindcss";
+
+:root {
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  line-height: 1.5;
+  font-weight: 500;
+
+  /* Colors - Light Theme (Default Neobrutalism) */
+  --bg-color: #FAF6EE;
+  --text-color: #121212;
+  --border-color: #121212;
+  --shadow-color: #121212;
+  
+  --accent-yellow: #FFD214;
+  --accent-orange: #FF7E40;
+  --accent-pink: #FF66B2;
+  --accent-green: #32D74B;
+  --accent-younggreen: #6fd87f;
+  --accent-cyan: #00C7BE;
+  --accent-purple: #AF52DE;
+  
+  --card-bg: #FFFFFF;
+  --card-bg-hover: #FDFBF7;
+  --grid-color: rgba(18, 18, 18, 0.08);
+  --grid-size: 24px;
+  
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Dark Mode Overrides (Cyber-Brutalist) */
+html.dark {
+  --bg-color: #121214;
+  --text-color: #F4F4F5;
+  --border-color: #E4E4E7;
+  --shadow-color: #000000;
+  
+  --accent-yellow: #FFE359;
+  --accent-orange: #FFA07A;
+  --accent-pink: #FF8DA1;
+  --accent-green: #5DF28B;
+  --accent-cyan: #70E0FF;
+  --accent-purple: #C084FC;
+  
+  --card-bg: #1D1D21;
+  --card-bg-hover: #26262B;
+  --grid-color: rgba(228, 228, 231, 0.04);
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100%;
+  overflow-x: hidden;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body {
+  background-image: radial-gradient(var(--grid-color) 1.5px, transparent 1.5px);
+  background-size: var(--grid-size) var(--grid-size);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Common Neobrutalist Component classes */
+.neobrutal-card {
+  background-color: var(--card-bg);
+  border: 3px solid var(--border-color);
+  box-shadow: 6px 6px 0px var(--shadow-color);
+  border-radius: 8px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+.neobrutal-card:hover {
+  transform: translate(-3px, -3px);
+  box-shadow: 9px 9px 0px var(--shadow-color);
+}
+
+.neobrutal-card:active {
+  transform: translate(2px, 2px);
+  box-shadow: 4px 4px 0px var(--shadow-color);
+}
+
+.neobrutal-btn {
+  font-family: 'Space Mono', monospace;
+  font-weight: 700;
+  text-transform: uppercase;
+  background-color: var(--accent-yellow);
+  color: #121212;
+  border: 3px solid #121212;
+  box-shadow: 4px 4px 0px #121212;
+  padding: 10px 24px;
+  border-radius: 4px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.neobrutal-btn:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0px #121212;
+}
+
+.neobrutal-btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0px #121212;
+}
+
+.dark .neobrutal-btn {
+  background-color: var(--accent-purple);
+  border-color: var(--border-color);
+  box-shadow: 4px 4px 0px var(--border-color);
+  color: #121212;
+}
+
+.dark .neobrutal-btn:hover {
+  box-shadow: 6px 6px 0px var(--border-color);
+}
+
+.dark .neobrutal-btn:active {
+  box-shadow: 2px 2px 0px var(--border-color);
+}

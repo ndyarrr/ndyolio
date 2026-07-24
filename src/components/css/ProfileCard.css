@@ -1,0 +1,673 @@
+:root {
+  --pointer-x: 50%;
+  --pointer-y: 50%;
+  --pointer-from-center: 0;
+  --pointer-from-top: 0.5;
+  --pointer-from-left: 0.5;
+  --card-opacity: 0;
+  --rotate-x: 0deg;
+  --rotate-y: 0deg;
+  --background-x: 50%;
+  --background-y: 50%;
+  --behind-glow-color: var(--accent-yellow);
+  --card-radius: 12px;
+}
+
+.pc-card-wrapper {
+  perspective: 600px;
+  transform: translate3d(0, 0, 0.1px);
+  position: relative;
+  touch-action: none;
+  width: fit-content;
+  margin: 0 auto;
+}
+
+/* Solid Neobrutalist Offset Shadow */
+.pc-behind {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-color: var(--accent-yellow);
+  border: 3px solid var(--border-color);
+  border-radius: var(--card-radius);
+  transform: translate(10px, 10px);
+  transition: transform 0.2s ease, background-color 0.3s ease;
+}
+
+.dark .pc-behind {
+  background-color: var(--accent-pink);
+}
+
+.pc-card-wrapper:hover .pc-behind {
+  transform: translate(14px, 14px);
+}
+
+.pc-card {
+  width: 320px;
+  max-width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  aspect-ratio: 0.718;
+  border-radius: var(--card-radius);
+  position: relative;
+  border: 3px solid var(--border-color);
+  box-shadow: none;
+  transition: transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+  transform: translateZ(0) rotateX(0deg) rotateY(0deg);
+  background-color: var(--card-bg);
+  backface-visibility: hidden;
+  overflow: hidden;
+}
+
+.pc-card:hover,
+.pc-card.active {
+  transition: none;
+  transform: translateZ(0) rotateX(var(--rotate-y)) rotateY(var(--rotate-x));
+}
+
+.pc-card-shell.entering .pc-card {
+  transition: transform 180ms ease-out;
+}
+
+.pc-card-shell {
+  position: relative;
+  z-index: 1;
+}
+
+.pc-inside {
+  display: grid;
+  inset: 0;
+  position: absolute;
+  background-color: var(--card-bg);
+  background-image: var(--inner-gradient);
+}
+
+.pc-inside > * {
+  display: grid;
+  grid-area: 1/-1;
+  border-radius: calc(var(--card-radius) - 3px);
+  pointer-events: none;
+}
+
+/* ── Shine: holographic light streak that follows pointer ── */
+.pc-shine {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  opacity: 0.5;
+  mix-blend-mode: screen;
+  background: radial-gradient(
+    circle at var(--pointer-x, 50%) var(--pointer-y, 50%),
+    rgba(255, 255, 255, 0.35) 0%,
+    rgba(255, 255, 255, 0.12) 20%,
+    transparent 60%
+  );
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.pc-card-shell:hover .pc-shine,
+.pc-card-shell.active .pc-shine {
+  opacity: 1;
+}
+
+/* ── Glare: diagonal sweep that follows pointer ── */
+.pc-glare {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  opacity: 0.5;
+  mix-blend-mode: overlay;
+  background: linear-gradient(
+    125deg,
+    transparent 0%,
+    transparent calc(var(--pointer-from-left, 0.5) * 100% - 15%),
+    rgba(255, 255, 255, 0.22) calc(var(--pointer-from-left, 0.5) * 100%),
+    transparent calc(var(--pointer-from-left, 0.5) * 100% + 15%),
+    transparent 100%
+  );
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+
+.pc-card-shell:hover .pc-glare,
+.pc-card-shell.active .pc-glare {
+  opacity: 1;
+}
+
+/* ── Floating Geometric Shapes ── */
+.pc-floating-shapes {
+  position: absolute;
+  inset: -30px;
+  z-index: -1;
+  pointer-events: none;
+  overflow: visible;
+}
+
+.pc-shape {
+  position: absolute;
+  border: 3px solid var(--border-color);
+  opacity: 0.5;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+/* Shape 1: Circle – top right, drifting */
+.pc-shape--circle {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background-color: var(--accent-yellow);
+  top: -8px;
+  right: -12px;
+  animation: floatShape1 4s ease-in-out infinite alternate;
+}
+
+.dark .pc-shape--circle {
+  background-color: var(--accent-pink);
+}
+
+/* Shape 2: Square – bottom left, rotating */
+.pc-shape--square {
+  width: 22px;
+  height: 22px;
+  border-radius: 3px;
+  background-color: var(--accent-cyan);
+  bottom: 60px;
+  left: -16px;
+  animation: floatShape2 5s ease-in-out infinite alternate;
+}
+
+/* Shape 3: Triangle (via border trick) – top left */
+.pc-shape--triangle {
+  width: 0;
+  height: 0;
+  border-left: 14px solid transparent;
+  border-right: 14px solid transparent;
+  border-bottom: 24px solid var(--accent-orange);
+  border-top: none;
+  background: transparent;
+  top: 40px;
+  left: -20px;
+  animation: floatShape3 6s ease-in-out infinite alternate;
+}
+
+/* Shape 4: Diamond – bottom right */
+.pc-shape--diamond {
+  width: 20px;
+  height: 20px;
+  background-color: var(--accent-green);
+  border-radius: 3px;
+  bottom: -10px;
+  right: 30px;
+  transform: rotate(45deg);
+  animation: floatShape4 4.5s ease-in-out infinite alternate;
+}
+
+/* Shape 5: Cross / Plus – mid right */
+.pc-shape--cross {
+  width: 18px;
+  height: 18px;
+  background: transparent;
+  border: none;
+  top: 50%;
+  right: -22px;
+  opacity: 0.7;
+  animation: floatShape5 5.5s ease-in-out infinite alternate;
+}
+
+.pc-shape--cross::before,
+.pc-shape--cross::after {
+  content: '';
+  position: absolute;
+  background-color: var(--accent-pink);
+  border: 2px solid var(--border-color);
+  border-radius: 2px;
+}
+
+.pc-shape--cross::before {
+  width: 100%;
+  height: 5px;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+}
+
+.pc-shape--cross::after {
+  width: 5px;
+  height: 100%;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
+}
+
+.dark .pc-shape--cross::before,
+.dark .pc-shape--cross::after {
+  background-color: var(--accent-cyan);
+}
+
+/* Shape 6: Small dot – floating near top center */
+.pc-shape--dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: var(--accent-pink);
+  top: -14px;
+  left: 40%;
+  animation: floatShape6 3.5s ease-in-out infinite alternate;
+}
+
+.dark .pc-shape--dot {
+  background-color: var(--accent-yellow);
+}
+
+/* ── Float keyframes ── */
+@keyframes floatShape1 {
+  0%   { transform: translate(0, 0) rotate(0deg); }
+  100% { transform: translate(-8px, 12px) rotate(20deg); }
+}
+
+@keyframes floatShape2 {
+  0%   { transform: translate(0, 0) rotate(0deg); }
+  100% { transform: translate(10px, -14px) rotate(45deg); }
+}
+
+@keyframes floatShape3 {
+  0%   { transform: translate(0, 0) rotate(0deg); }
+  100% { transform: translate(6px, -10px) rotate(-15deg); }
+}
+
+@keyframes floatShape4 {
+  0%   { transform: rotate(45deg) translate(0, 0); }
+  100% { transform: rotate(45deg) translate(-6px, -8px); }
+}
+
+@keyframes floatShape5 {
+  0%   { transform: translate(0, 0) rotate(0deg); }
+  100% { transform: translate(-5px, 10px) rotate(30deg); }
+}
+
+@keyframes floatShape6 {
+  0%   { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(8px, 6px) scale(1.3); }
+}
+
+.pc-avatar-content {
+  overflow: hidden;
+  position: relative;
+}
+
+.pc-avatar-content .avatar {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform-origin: 50% 50%;
+  transform: translateX(-50%) translateZ(0);
+  filter: grayscale(0.2) contrast(1.1);
+  backface-visibility: hidden;
+  transition: filter 0.3s;
+}
+
+.dark .pc-avatar-content .avatar {
+  filter: grayscale(0.3) contrast(1.1) brightness(0.95);
+}
+
+.pc-avatar-content::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.35) 0%,
+    rgba(0, 0, 0, 0) 30%,
+    rgba(0, 0, 0, 0) 70%,
+    rgba(0, 0, 0, 0.45) 100%
+  );
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* ── Inner Shapes: overlaying the profile image ── */
+.pc-inner-shapes {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.pc-ishape {
+  position: absolute;
+  pointer-events: none;
+  will-change: transform, opacity;
+  /* Start just below the container bottom */
+  top: 100%;
+  left: 0;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-fill-mode: both;
+  
+  /* Neobrutalist Core Styles */
+  border: 2.5px solid var(--border-color);
+  box-shadow: 2px 2px 0 var(--border-color);
+  background-color: var(--accent-yellow);
+}
+
+/* ── Each shape: unique size, horizontal offset, speed, delay ── */
+
+/* Circle 1 — cyan circle, right side */
+.pc-ishape--circle-1 {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--accent-cyan);
+  left: 74%;
+}
+
+/* Circle 2 — pink circle, left side */
+.pc-ishape--circle-2 {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--accent-pink);
+  left: 14%;
+}
+
+/* Square — yellow square, left side */
+.pc-ishape--square {
+  width: 26px;
+  height: 26px;
+  border-radius: 4px;
+  background: var(--accent-yellow);
+  left: 15%;
+  box-shadow: 3px 3px 0 var(--border-color);
+}
+
+/* Capsule (previously Triangle) — orange pill, right side */
+.pc-ishape--triangle {
+  width: 16px;
+  height: 30px;
+  border-radius: 10px;
+  background: var(--accent-orange);
+  left: 85%;
+}
+
+/* Ring — hollow circle with heavy border, right side */
+.pc-ishape--ring {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border-width: 3.5px;
+  background: transparent;
+  left: 90%;
+  box-shadow: 3px 3px 0 var(--border-color);
+}
+
+/* Dot 1 — lime green dot, far left */
+.pc-ishape--dot-1 {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--accent-green);
+  left: 6%;
+}
+
+/* Dot 2 — cyan dot, right side */
+.pc-ishape--dot-2 {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--accent-cyan);
+  left: 88%;
+}
+
+/* Dot 3 — pink dot, left side */
+.pc-ishape--dot-3 {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--accent-pink);
+  left: 20%;
+}
+
+/* ── Image Shine: sweeping light across the image ── */
+.pc-img-shine {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.pc-img-shine::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(
+    105deg,
+    transparent 20%,
+    rgba(255, 255, 255, 0.12) 45%,
+    rgba(255, 255, 255, 0.28) 50%,
+    rgba(255, 255, 255, 0.12) 55%,
+    transparent 80%
+  );
+  transform: skewX(-20deg);
+  animation: imgShineSweep 5s ease-in-out infinite;
+}
+
+.pc-card-shell:hover .pc-img-shine::before,
+.pc-card-shell.active .pc-img-shine::before {
+  background: linear-gradient(
+    105deg,
+    transparent 20%,
+    rgba(255, 255, 255, 0.2) 45%,
+    rgba(255, 255, 255, 0.45) 50%,
+    rgba(255, 255, 255, 0.2) 55%,
+    transparent 80%
+  );
+}
+
+@keyframes imgShineSweep {
+  0%, 100% { left: -100%; }
+  50%      { left: 150%; }
+}
+
+/* Neobrutalist sub-card user info details */
+.pc-user-info {
+  position: absolute;
+  --ui-inset: 16px;
+  bottom: var(--ui-inset);
+  left: var(--ui-inset);
+  right: var(--ui-inset);
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--card-bg);
+  border: 2.5px solid var(--border-color);
+  box-shadow: 4px 4px 0 var(--border-color);
+  border-radius: 8px;
+  padding: 10px 12px;
+  pointer-events: auto;
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+.pc-user-details {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.pc-mini-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 2px solid var(--border-color);
+  flex-shrink: 0;
+}
+
+.pc-mini-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.pc-user-text {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.pc-handle {
+  font-family: 'Space Mono', monospace;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-color);
+}
+
+.pc-status {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--accent-green);
+  text-transform: uppercase;
+}
+
+.pc-contact-btn {
+  background-color: var(--accent-cyan);
+  border: 2px solid var(--border-color);
+  box-shadow: 2px 2px 0 var(--border-color);
+  border-radius: 4px;
+  padding: 8px 14px;
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  font-weight: 700;
+  color: #121212;
+  cursor: pointer;
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+.pc-contact-btn:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 3px 3px 0 var(--border-color);
+  background-color: var(--accent-yellow);
+}
+
+.pc-contact-btn:active {
+  transform: translate(1px, 1px);
+  box-shadow: 1px 1px 0 var(--border-color);
+}
+
+.pc-content:not(.pc-avatar-content) {
+  max-height: 100%;
+  overflow: hidden;
+  position: relative;
+  z-index: 5;
+}
+
+.pc-details {
+  width: 100%;
+  position: absolute;
+  bottom: 5.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Bold typography headers */
+.pc-details h3 {
+  font-weight: 900;
+  margin: 0;
+  font-size: min(4.5svh, 2.4em);
+  color: #FFFFFF;
+  text-shadow: 
+    -2px -2px 0 #000,  
+     2px -2px 0 #000,
+    -2px  2px 0 #000,
+     2px  2px 0 #000,
+     3px  3px 0 #000;
+}
+
+/* Neobrutalist Title Badge */
+.pc-details p {
+  font-family: 'Space Mono', monospace;
+  font-weight: 700;
+  font-size: 13px;
+  text-transform: uppercase;
+  color: #121212;
+  background-color: var(--accent-orange);
+  border: 2px solid #121212;
+  box-shadow: 3px 3px 0 #121212;
+  padding: 4px 10px;
+  border-radius: 4px;
+  display: inline-block;
+  margin: 0 auto;
+  width: max-content;
+}
+
+@media (max-width: 1024px) {
+  .pc-behind {
+    transform: translate(6px, 6px);
+  }
+
+  .pc-card-wrapper:hover .pc-behind {
+    transform: translate(8px, 8px);
+  }
+
+  .pc-card {
+    width: min(300px, 85vw);
+    height: auto;
+    aspect-ratio: 0.718;
+  }
+
+  .pc-details h3 {
+    font-size: 1.8em;
+  }
+
+  .pc-details p {
+    font-size: 11px;
+  }
+
+  /* Scale down floating shapes on smaller screens */
+  .pc-floating-shapes {
+    inset: -15px;
+  }
+
+  .pc-shape--circle {
+    width: 20px;
+    height: 20px;
+  }
+
+  .pc-shape--square {
+    width: 16px;
+    height: 16px;
+  }
+
+  .pc-shape--diamond {
+    width: 14px;
+    height: 14px;
+  }
+
+  .pc-shape--cross {
+    width: 14px;
+    height: 14px;
+  }
+
+  .pc-shape--dot {
+    width: 7px;
+    height: 7px;
+  }
+}

@@ -1,0 +1,168 @@
+.top-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    width: 100%;
+    max-width: none;
+    display: flex;
+    gap: 24px;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    background-color: var(--card-bg);
+    color: var(--text-color);
+    border: none;
+    border-bottom: 3px solid var(--border-color);
+    box-shadow: none;
+    padding: 12px 24px;
+    border-radius: 0;
+    transition: background-color 0.3s, border-color 0.3s, box-shadow 0.3s;
+}
+
+.top-nav > span {
+    font-family: 'Space Mono', monospace;
+    position: relative;
+    padding: 6px 12px;
+    border: 2px solid transparent;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    color: var(--text-color);
+    opacity: 0.85;
+}
+
+.top-nav > span:hover {
+    opacity: 1;
+    background-color: var(--accent-cyan);
+    color: #121212;
+    border-color: var(--border-color);
+}
+
+.dark .top-nav > span:hover {
+    background-color: var(--accent-green);
+    color: #121212;
+}
+
+/* Active navigation badge - highlights the active page block */
+.top-nav > span.active {
+    opacity: 1;
+    background-color: var(--accent-yellow);
+    color: #121212;
+    border: 2px solid var(--border-color);
+    box-shadow: 2px 2px 0 var(--border-color);
+    transform: translate(-1px, -1px);
+}
+
+.dark .top-nav > span.active {
+    background-color: var(--accent-purple);
+    color: #FFFFFF;
+    border-color: var(--border-color);
+    box-shadow: 2px 2px 0 var(--border-color);
+}
+
+/* Underline effect is removed in favor of chunky highlight pills */
+.top-nav > span::after {
+    display: none !important;
+}
+/* Floating Neobrutalist Theme Toggle */
+.theme-toggle-btn {
+    position: absolute;
+    right: 24px;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: var(--accent-yellow);
+    color: #121212;
+    border: 2.5px solid var(--border-color);
+    box-shadow: 3px 3px 0px var(--shadow-color);
+    border-radius: 6px;
+    padding: 6px 12px;
+    cursor: pointer;
+    font-family: 'Space Mono', monospace;
+    font-weight: 700;
+    font-size: 0.75rem;
+    transition: transform 0.15s, box-shadow 0.15s, background-color 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 32px;
+    box-sizing: border-box;
+    z-index: 15;
+}
+
+.dark .theme-toggle-btn {
+    background-color: var(--accent-purple);
+    color: #FFFFFF;
+    border-color: var(--border-color);
+    box-shadow: 3px 3px 0px var(--border-color);
+}
+
+.theme-toggle-btn:hover {
+    transform: translateY(-50%) translate(-1px, -1px);
+    box-shadow: 4px 4px 0px var(--shadow-color);
+}
+
+.theme-toggle-btn:active {
+    transform: translateY(-50%) translate(1px, 1px);
+    box-shadow: 1px 1px 0px var(--shadow-color);
+}
+
+.toggle-inner {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.toggle-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.toggle-icon svg {
+    width: 14px;
+    height: 14px;
+}
+
+/* Responsive adjustment */
+@media (max-width: 900px) {
+    .theme-toggle-btn .toggle-text {
+        display: none; /* Hide text on smaller widths to save space */
+    }
+}
+
+@media (max-width: 600px) {
+    .top-nav {
+        width: 100%;
+        gap: 10px;
+        font-size: 12.5px;
+        padding: 10px 12px;
+    }
+    
+    .top-nav > span {
+        padding: 6px 8px;
+    }
+    
+    .theme-toggle-btn {
+        right: 12px;
+        padding: 6px;
+        height: 28px;
+        width: 28px;
+        border-radius: 4px;
+        box-shadow: 2px 2px 0px var(--shadow-color);
+    }
+
+    .dark .theme-toggle-btn {
+        box-shadow: 2px 2px 0px #FFFFFF;
+    }
+
+    .theme-toggle-btn .toggle-inner {
+        gap: 0;
+    }
+    
+    .theme-toggle-btn .toggle-icon svg {
+        width: 14px;
+        height: 14px;
+    }
+}

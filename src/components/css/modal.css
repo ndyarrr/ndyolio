@@ -1,0 +1,142 @@
+.retro-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(12, 12, 14, 0.7);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1100;
+  animation: modal-bg-fade 0.2s ease;
+}
+
+.retro-modal-window {
+  width: 90%;
+  max-width: 460px;
+  animation: modal-window-pop 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  overflow: hidden;
+  box-shadow: 8px 8px 0px var(--shadow-color) !important;
+}
+
+.retro-modal-window .window-header {
+  background-color: var(--border-color);
+  color: var(--bg-color);
+  display: flex;
+  align-items: center;
+  padding: 10px 16px;
+  border-bottom: 3px solid var(--border-color);
+  position: relative;
+  gap: 16px;
+}
+
+.retro-modal-window .window-title {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.85rem;
+  font-weight: 700;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  white-space: nowrap;
+}
+
+.retro-modal-window .window-close-x {
+  background: none;
+  border: none;
+  color: inherit;
+  font-size: 1.5rem;
+  line-height: 1;
+  font-weight: 800;
+  cursor: pointer;
+  margin-left: auto;
+  padding: 0 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.15s;
+}
+
+.retro-modal-window .window-close-x:hover {
+  color: #FF5F56;
+}
+
+.retro-modal-window .window-body {
+  padding: 24px;
+  background-color: var(--card-bg);
+  color: var(--text-color);
+  font-family: inherit;
+}
+
+/* Skills Modal custom progress bars */
+.skill-bar-wrapper {
+  margin-bottom: 16px;
+}
+
+.skill-bar-wrapper:last-child {
+  margin-bottom: 0;
+}
+
+.skill-label {
+  font-family: 'Space Mono', monospace;
+  font-weight: 700;
+  font-size: 0.9rem;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+
+.skill-track {
+  height: 18px;
+  background-color: var(--bg-color);
+  border: 2px solid var(--border-color);
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+}
+
+.skill-fill {
+  height: 100%;
+  background-color: var(--accent-orange);
+  border-right: 2px solid var(--border-color);
+  transition: width 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.skill-fill.vite { background-color: var(--accent-yellow); }
+.skill-fill.react { background-color: var(--accent-cyan); }
+.skill-fill.node { background-color: var(--accent-green); }
+.skill-fill.ae { background-color: var(--accent-purple); }
+.skill-fill.blender { background-color: var(--accent-pink); }
+
+/* Retro bio formatting */
+.notepad-text {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  white-space: pre-line;
+  margin: 0;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+/* Animations */
+@keyframes modal-bg-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes modal-window-pop {
+  from {
+    opacity: 0;
+    transform: scale(0.9) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}

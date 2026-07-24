@@ -1,0 +1,79 @@
+.custom-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--card-bg);
+    color: var(--text-color);
+    border-radius: 10px;
+    padding: 0; /* padding is handled by sub-elements for retro window style */
+    border: 3px solid var(--border-color);
+    box-shadow: 6px 6px 0px var(--shadow-color);
+    margin-top: 16px;
+    max-width: 300px;
+    width: 100%;
+    cursor: pointer;
+    overflow: hidden;
+    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.3s;
+}
+
+.custom-card:hover {
+    transform: translate(-4px, -4px);
+    box-shadow: 10px 10px 0px var(--shadow-color);
+}
+
+.custom-card:active {
+    transform: translate(2px, 2px);
+    box-shadow: 4px 4px 0px var(--shadow-color);
+}
+
+/* Retro OS Title Bar styling */
+.custom-card h4 {
+    margin: 0;
+    font-size: 0.9rem;
+    font-weight: 700;
+    font-family: 'Space Mono', monospace;
+    background-color: var(--border-color);
+    color: var(--bg-color);
+    padding: 10px 16px;
+    display: flex;
+    align-items: center;
+    border-bottom: 3px solid var(--border-color);
+}
+
+/* Single pseudo-element drawing red, yellow, and green window dots */
+.custom-card h4::before {
+    content: "";
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #FF5F56;
+    border: 1px solid #121212;
+    box-shadow: 14px 0 0 #FFBD2E, 28px 0 0 #27C93F;
+    margin-right: 36px;
+    flex-shrink: 0;
+}
+
+.custom-card ul {
+    margin: 0;
+    padding: 20px 20px 20px 36px;
+    list-style-type: square;
+    color: var(--text-color);
+}
+
+.custom-card li {
+    margin-bottom: 10px;
+    font-size: 0.95rem;
+    line-height: 1.4;
+    font-weight: 600;
+}
+
+.custom-card li:last-child {
+    margin-bottom: 0;
+}
+
+@media (max-width: 768px) {
+    .custom-card {
+        max-width: 100%;
+    }
+}

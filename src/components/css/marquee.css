@@ -1,0 +1,59 @@
+.neobrutal-marquee {
+  width: 102%;
+  left: -1%;
+  overflow: hidden;
+  background-color: var(--accent-yellow);
+  color: #121212;
+  border-top: 3px solid var(--border-color);
+  border-bottom: 3px solid var(--border-color);
+  padding: 14px 0;
+  display: flex;
+  white-space: nowrap;
+  font-family: 'Space Mono', monospace;
+  font-weight: 800;
+  font-size: 1.15rem;
+  text-transform: uppercase;
+  position: relative;
+  z-index: 5;
+  transform: rotate(-1.5deg); /* Neobrutalist rotated style */
+  margin: 4.5rem 0;
+  box-shadow: 4px 4px 0px var(--shadow-color);
+  box-sizing: border-box;
+}
+
+.dark .neobrutal-marquee {
+  background-color: var(--accent-purple);
+  color: #FFFFFF;
+  border-color: #FFFFFF;
+  box-shadow: 4px 4px 0px #FFFFFF;
+}
+
+.marquee-content {
+  display: inline-flex;
+  animation: marquee-scroll 24s linear infinite;
+  gap: 2.5rem;
+}
+
+.marquee-item {
+  flex-shrink: 0;
+  letter-spacing: 0.5px;
+}
+
+@keyframes marquee-scroll {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-33.333%, 0, 0);
+  }
+}
+
+@media (max-width: 768px) {
+  .neobrutal-marquee {
+    font-size: 0.95rem;
+    padding: 10px 0;
+    margin: 3rem 0;
+    width: 105%;
+    left: -2.5%;
+  }
+}
