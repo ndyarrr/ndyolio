@@ -3,16 +3,15 @@ import './css/marquee.css';
 
 export default function Marquee() {
   const items = [
-    "✦ FRONTEND DEVELOPER", 
+    "✦ FE + BE DEVELOPER", 
     "✦ VITE", 
     "✦ REACT", 
     "✦ NODE.JS", 
     "✦ PHP", 
-    "✦ Linux", 
-    "✦ AFTER EFFECTS", 
+    "✦ Linux",  
     "✦ AVAILABLE FOR HIRE ◆", 
     "✦ MySql ★",
-    "✦ LEARNING ☆"
+    "✦ LEARN ☆"
   ];
   
   // Triple-duplicate for seamless looping animation

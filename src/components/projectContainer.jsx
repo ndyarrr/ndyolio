@@ -1,9 +1,8 @@
 import { useRef, useEffect, useState, useCallback } from "react";
 import "./css/projectContainer.css";
-import Edit1 from "../assets/project/edit/cuma temen.mp4";
 import WebsitePorttofolio from "../assets/project/web/web_porto.png";
 import WebsiteEKantin from "../assets/project/web/e_kantin.png";
-import TmEdit1 from "../assets/project/edit/thumbnail/edit1.png";
+import WebsiteEJurnal from "../assets/project/web/e_jurnal.png";
 
 export default function ProjectSlider() {
     const scrollRef = useRef(null);
@@ -32,15 +31,16 @@ export default function ProjectSlider() {
             date: "2026-4-21",
             purpose: "Menyajikan sistem manajemen kantin digital"
         },
+
         {
-            type: "video",
-            category: "video-editing",
-            src: Edit1,
-            thumbnail: TmEdit1,
-            name: "Test After Effect",
-            date: "2025-11-20",
-            purpose: "Gabut Doang"
+            type: "image",
+            category: "app-web-game",
+            src: WebsiteEJurnal,
+            name: "E-Jurnal Management",
+            date: "2026-11-17",
+            purpose: "Menyajikan manajemen jurnal digital untuk sekolah"
         }
+        
     ];
 
     // Filter projek berdasarkan folder navigasi kiri

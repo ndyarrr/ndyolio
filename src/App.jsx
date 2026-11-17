@@ -186,7 +186,7 @@ export default function App() {
 
           <div className="about-right">
             <QuotesCard
-              quote="Malas nak cakap"
+              quote="Wel wel"
               author="Fan"
             />
             <MusicCard />
