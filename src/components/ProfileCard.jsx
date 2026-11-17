@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import './css/ProfileCard.css';
+import fandyAvatar from '../assets/profile/fandy.jpeg';
 
 const DEFAULT_INNER_GRADIENT = 'linear-gradient(145deg,#60496e8c 0%,#71C4FF44 100%)';
 
@@ -16,7 +17,7 @@ const round = (v, precision = 3) => parseFloat(v.toFixed(precision));
 const adjust = (v, fMin, fMax, tMin, tMax) => round(tMin + ((tMax - tMin) * (v - fMin)) / (fMax - fMin));
 
 const ProfileCardComponent = ({
-  avatarUrl = "../src/assets/profile/fandy.jpeg",
+  avatarUrl = fandyAvatar,
   iconUrl = "data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Cpath d='M22 22 L14 30 L22 38 M38 22 L46 30 L38 38 M33 18 L27 42' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E",
   grainUrl = "data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.15'/%3E%3C/svg%3E",
   innerGradient,
