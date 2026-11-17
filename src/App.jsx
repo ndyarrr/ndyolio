@@ -139,7 +139,6 @@ export default function App() {
                 handle="ndyy"
                 status="Online"
                 contactText="Contact Me"
-                avatarUrl="../src/assets/profile/fandy.jpeg"
                 showUserInfo={true}
                 enableTilt={true}
                 enableMobileTilt={false}

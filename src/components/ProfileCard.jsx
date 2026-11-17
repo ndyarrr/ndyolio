@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import './css/ProfileCard.css';
-import fandyAvatar from '../assets/profile/fandy.jpeg';
+import fandyAvatar from '../assets/profile/usercard.jpeg';
 
 const DEFAULT_INNER_GRADIENT = 'linear-gradient(145deg,#60496e8c 0%,#71C4FF44 100%)';
 
