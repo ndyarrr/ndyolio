@@ -17,7 +17,8 @@
   perspective: 600px;
   transform: translate3d(0, 0, 0.1px);
   position: relative;
-  touch-action: none;
+  /* Keep vertical page scrolling available when a touch starts on the card. */
+  touch-action: pan-y;
   width: fit-content;
   margin: 0 auto;
 }
